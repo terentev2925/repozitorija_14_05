@@ -1,35 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
     <style>
-        body{
+        body {
             text-align: center;
         }
     </style>
 </head>
+
 <body>
     <h1>Kvadrātvienādojuma risinātājs</h1>
-    <p><input type="text" id="sk1" ">  <input type="text" id="sk2">  <input type="text" id="sk3"></p>
+    <p><input type="text" id="sk1" ">  <input type=" text" id="sk2"> <input type="text" id="sk3"></p>
     <br>
     <button type="button" onclick="aprekinat()">Aprēķināt</button>
-
+    <p id="rezultats"></p>
 
     <script>
-        function disk (a, b, c){
-            return b*b-4*a*c;
+
+
+        function disk(a, b, c) {
+            var D = b * b - 4 * a * c;
+            return D;
         }
 
-        function saknes(a, b, D){
-            
+        function saknes(a, b, D) {
+            if (D < 0) {
+                return false;
+            } else {
+                var x1 = (-b + Math.sqrt(D)) / 2 * a;
+                var x2 = (-b - Math.sqrt(D)) / 2 * a;
+                return [x1, x2];
+            }
         }
+        function aprekinat() {
+            var a = Number(sk1.value);
+            var b = Number(sk2.value);
+            var c = Number(sk3.value);
 
-        function aprekinat(){
+            if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
+                rezultats.innerHTML = "Lūdzu ievadi konkētus datus";
+                return;
+            }
+            var atb = saknes(a, b, disk(a, b, c));
+            if (atb === false) {
+                rezultats.innerHTML = "Kvadrātvienādojumam nav reālu sakņu";
+            } else {
+                rezultats.innerHTML = "Saknes: x1 ="+ ${atb[0].toFixed(3)}", x2 = "${atb[1].toFixed(3)};
 
+            }
+
+            disk();
+            saknes();
         }
     </script>
 </body>
+
 </html>
